@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: 227 6 19;
+  --brand-dark: 176 0 14;
+  --accent: 255 210 0;
+  --accent-ink: 26 26 26;
+  --footer: 11 26 44;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[#F4F5F7] text-ink antialiased;
+}
+
+/* Padrão de ondas japonesas (seigaiha) usado nos fundos vermelhos */
+.bg-waves {
+  background-image:
+    radial-gradient(circle at 100% 150%, transparent 24%, rgba(255, 255, 255, 0.07) 25%, rgba(255, 255, 255, 0.07) 28%, transparent 29%, transparent 36%, rgba(255, 255, 255, 0.07) 37%, rgba(255, 255, 255, 0.07) 40%, transparent 41%),
+    radial-gradient(circle at 0 150%, transparent 24%, rgba(255, 255, 255, 0.07) 25%, rgba(255, 255, 255, 0.07) 28%, transparent 29%, transparent 36%, rgba(255, 255, 255, 0.07) 37%, rgba(255, 255, 255, 0.07) 40%, transparent 41%);
+  background-size: 48px 24px;
+}
+
+.hero-red {
+  background-color: rgb(var(--brand));
+  background-image:
+    radial-gradient(ellipse at 60% 40%, rgba(255, 255, 255, 0.18), transparent 60%),
+    linear-gradient(90deg, rgb(var(--brand-dark)) 0%, rgb(var(--brand)) 45%, rgb(var(--brand-dark)) 100%);
+}
+
+/* Imagem do mascote se misturando ao fundo do banner */
+.fade-edges {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-4 sm:px-6;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-brand {
+    @apply btn bg-brand text-white hover:bg-brand-dark focus-visible:ring-brand;
+  }
+  .btn-accent {
+    @apply btn bg-accent text-accent-ink hover:brightness-95 focus-visible:ring-accent;
+  }
+  .btn-outline {
+    @apply btn border border-slate-300 bg-white text-ink hover:bg-slate-50;
+  }
+  .card {
+    @apply rounded-xl bg-white shadow-card;
+  }
+  .section-title {
+    @apply font-display text-2xl font-extrabold text-ink sm:text-[1.7rem];
+  }
+  .input {
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20;
+  }
+  .label {
+    @apply mb-1 block text-sm font-semibold text-slate-700;
+  }
+}

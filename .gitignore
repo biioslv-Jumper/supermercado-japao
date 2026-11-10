@@ -1,0 +1,30 @@
+# dependências
+node_modules/
+.pnp
+.pnp.js
+
+# build
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# variáveis de ambiente (NUNCA enviar ao GitHub)
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# Supabase CLI local
+supabase/.branches
+supabase/.temp
+
+# sistema / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+.vercel
