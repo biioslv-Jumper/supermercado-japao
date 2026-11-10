@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ImageOff } from "lucide-react";
 import { discountPercent, isExternal, mediaUrl, money, safeHref } from "@/lib/format";
 import type { Banner, Product } from "@/lib/types";
+import { Hero } from "./hero";
 
 /** Imagem vinda do banco (pasta public/ ou Supabase Storage) com reserva. */
 export function MediaImage({
@@ -127,11 +128,7 @@ export function ProductCard({
   );
 }
 
-/**
- * Banner de topo das páginas (Ofertas, Setores, Serviços): fundo vermelho,
- * textos editáveis à esquerda, ilustração (banner do admin) no centro e
- * frase manuscrita à direita — fiel às imagens de referência.
- */
+/** Banner de topo das páginas internas (Ofertas, Setores, Serviços). */
 export function PageHero({
   banner,
   title1,
@@ -150,44 +147,22 @@ export function PageHero({
   rounded?: boolean;
 }) {
   return (
-    <section className={`hero-red relative overflow-hidden text-white ${rounded ? "rounded-2xl" : ""}`}>
-      <div className="bg-waves absolute inset-0 opacity-60" aria-hidden="true" />
-      <div className="container-site relative grid min-h-[190px] items-center gap-4 py-6 md:grid-cols-[1.1fr_1fr_1fr]">
+    <Hero
+      rounded={rounded}
+      imagePath={banner?.image_path}
+      imageAlt={banner?.title ?? undefined}
+      script={script}
+      left={
         <div className="flex items-center gap-4">
           {leadingIcon}
           <div>
-            {title1 && <p className="font-display text-4xl font-extrabold leading-none sm:text-5xl">{title1}</p>}
-            <h1 className={`font-display font-extrabold leading-none ${title1 ? "text-accent text-5xl sm:text-6xl" : "text-5xl sm:text-6xl"}`}>{title2}</h1>
-            {subtitle && <p className="mt-2 max-w-md whitespace-pre-line text-lg leading-snug text-white/95">{subtitle}</p>}
+            {title1 && <p className="font-display text-4xl font-extrabold leading-none drop-shadow sm:text-5xl">{title1}</p>}
+            <h1 className={`font-display text-5xl font-extrabold leading-none drop-shadow sm:text-6xl ${title1 ? "text-accent" : ""}`}>{title2}</h1>
+            {subtitle && <p className="mt-3 max-w-md whitespace-pre-line text-lg leading-snug text-white/95">{subtitle}</p>}
           </div>
         </div>
-        <div className="-mb-6 hidden self-end md:block">
-          {banner?.image_path && (
-            <MediaImage path={banner.image_path} alt={banner.title ?? ""} fit="contain" imgClassName="object-bottom" className="h-[190px] w-full" sizes="33vw" priority />
-          )}
-        </div>
-        {script && (
-          <p className="hidden -rotate-6 whitespace-pre-line text-right font-script text-2xl leading-snug md:block lg:text-3xl">
-            <ScriptText text={script} />
-          </p>
-        )}
-      </div>
-    </section>
-  );
-}
-
-/** Frase manuscrita com a segunda parte em amarelo e sublinhado. */
-export function ScriptText({ text }: { text: string }) {
-  const words = text.split(" ");
-  const mid = Math.ceil(words.length / 3);
-  return (
-    <>
-      {words.slice(0, mid).join(" ")}{" "}
-      <span className="text-accent">{words.slice(mid, mid * 2).join(" ")}</span> {words.slice(mid * 2).join(" ")}
-      <svg viewBox="0 0 200 12" className="ml-auto mt-1 block h-3 w-48 text-accent" aria-hidden="true">
-        <path d="M2 10 Q100 0 198 4" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" />
-      </svg>
-    </>
+      }
+    />
   );
 }
 

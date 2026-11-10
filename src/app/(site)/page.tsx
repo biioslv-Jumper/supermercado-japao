@@ -4,7 +4,8 @@ import { getSite } from "@/lib/site";
 import { getBanners, getCategories, getHighlight, getNews, getOffers, getServices } from "@/lib/queries";
 import { discountPercent, isExternal, mediaUrl, money, safeHref, telLink, whatsappLink } from "@/lib/format";
 import { BannerCarousel } from "@/components/site/banner-carousel";
-import { MediaImage, ProductCard, ScriptText, SectionHeader, SmartLink } from "@/components/site/ui";
+import { MediaImage, ProductCard, SectionHeader, SmartLink } from "@/components/site/ui";
+import { Hero } from "@/components/site/hero";
 import { Icon } from "@/components/icon";
 import { WhatsappIcon } from "@/components/site/social-icons";
 
@@ -30,11 +31,14 @@ export default async function HomePage() {
   return (
     <>
       {/* ===== BANNER PRINCIPAL ===== */}
-      <section className="hero-red relative overflow-hidden text-white">
-        <div className="bg-waves absolute inset-0 opacity-60" aria-hidden="true" />
-        <div className="container-site relative grid min-h-[230px] items-center gap-4 pb-14 pt-8 md:grid-cols-[1.2fr_1fr_1fr]">
-          <div>
-            <h1 className="font-display text-3xl font-bold leading-tight sm:text-4xl">
+      <Hero
+        overlap
+        imagePath={hero?.image_path}
+        imageAlt={hero?.title ?? undefined}
+        script={t["home.hero_script"]}
+        left={
+          <>
+            <h1 className="font-display text-[2rem] font-bold leading-[1.1] drop-shadow sm:text-4xl lg:text-[2.6rem]">
               {t["home.hero_line1"]}
               <br />
               <span className="font-extrabold text-accent">{t["home.hero_highlight"]}</span>
@@ -42,23 +46,15 @@ export default async function HomePage() {
               {t["home.hero_line3"]}
             </h1>
             {t["home.hero_button"] && (
-              <SmartLink href={t["home.hero_button_url"] || "/ofertas"} className="btn-accent mt-4 px-6 py-2.5 text-base">
+              <SmartLink href={t["home.hero_button_url"] || "/ofertas"} className="btn-accent mt-5 px-6 py-2.5 text-base shadow-lg">
                 {t["home.hero_button"]} <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </SmartLink>
             )}
-          </div>
-          <div className="-mb-14 hidden self-end md:block">
-            {hero?.image_path && (
-              <MediaImage path={hero.image_path} alt={hero.title ?? ""} fit="contain" imgClassName="object-bottom" className="h-[250px] w-full" sizes="33vw" priority />
-            )}
-          </div>
-          <p className="hidden -rotate-6 text-right font-script text-2xl leading-snug md:block lg:text-[2rem]">
-            <ScriptText text={t["home.hero_script"]} />
-          </p>
-        </div>
-      </section>
+          </>
+        }
+      />
 
-      <div className="container-site relative -mt-8 space-y-8">
+      <div className="container-site relative z-10 -mt-8 space-y-8">
         {/* ===== ACONTECE NO JAPÃO ===== */}
         {carousel.length > 0 && (
           <section className="card p-4 sm:p-5" aria-labelledby="acontece">

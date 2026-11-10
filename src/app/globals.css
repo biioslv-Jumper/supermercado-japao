@@ -33,12 +33,6 @@ body {
     linear-gradient(90deg, rgb(var(--brand-dark)) 0%, rgb(var(--brand)) 45%, rgb(var(--brand-dark)) 100%);
 }
 
-/* Imagem do mascote se misturando ao fundo do banner */
-.fade-edges {
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-}
-
 @layer components {
   .container-site {
     @apply mx-auto w-full max-w-site px-4 sm:px-6;

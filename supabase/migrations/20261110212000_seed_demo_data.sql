@@ -245,11 +245,11 @@ insert into public.news (product_id, title, description, sort_order) values
 ((select id from public.products where slug='cafe-torrado-moido-500g'), 'Café Torrado e Moído', 'Aroma marcante para começar bem o dia.', 2);
 
 insert into public.banners (placement, image_path, title, description, button_text, link_url, sort_order) values
-('home_hero', '/demo/hero-home-mascots.webp', null, null, null, null, 0),
+('home_hero', '/demo/mascotes.webp', null, null, null, null, 0),
 ('home_carousel', '/demo/campaign-sorteio.webp', null, null, null, '/contato', 0),
-('offers_header', '/demo/hero-offers-mascots.webp', null, null, null, null, 0),
-('sectors_header', '/demo/hero-sectors-mascots.webp', null, null, null, null, 0),
-('services_header', '/demo/hero-services-mascots.webp', null, null, null, null, 0),
+('offers_header', '/demo/mascotes.webp', null, null, null, null, 0),
+('sectors_header', '/demo/mascotes.webp', null, null, null, null, 0),
+('services_header', '/demo/mascotes.webp', null, null, null, null, 0),
 ('cafe_header', '/demo/cafe-header.webp', null, null, null, null, 0);
 
 insert into public.services (name, description, icon, image_path, sort_order) values

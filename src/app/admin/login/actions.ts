@@ -22,7 +22,14 @@ export async function adminLogin(_: FormState, fd: FormData): Promise<FormState>
   let email: string | undefined;
   try {
     const service = createServiceClient();
-    const { data: admin } = await service.from("admins").select("user_id").eq("username", username).maybeSingle();
+    const { data: admin, error: lookupError } = await service.from("admins").select("user_id").eq("username", username).maybeSingle();
+    if (lookupError) {
+      console.error("[admin-login] falha ao consultar admins:", lookupError.message);
+      return {
+        error: "A chave SUPABASE_SERVICE_ROLE_KEY cadastrada na Vercel está inválida. Copie a chave service_role novamente (veja o README) e faça Redeploy.",
+        fields: { username }
+      };
+    }
     if (admin) {
       const { data } = await service.auth.admin.getUserById(admin.user_id);
       email = data.user?.email ?? undefined;
