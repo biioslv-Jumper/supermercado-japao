@@ -47,9 +47,9 @@ export default async function HomePage() {
               </SmartLink>
             )}
           </div>
-          <div className="hidden h-full min-h-[200px] md:block">
+          <div className="-mb-14 hidden self-end md:block">
             {hero?.image_path && (
-              <MediaImage path={hero.image_path} alt={hero.title ?? ""} fit="contain" className="fade-edges h-full min-h-[200px] w-full" sizes="33vw" priority />
+              <MediaImage path={hero.image_path} alt={hero.title ?? ""} fit="contain" imgClassName="object-bottom" className="h-[250px] w-full" sizes="33vw" priority />
             )}
           </div>
           <p className="hidden -rotate-6 text-right font-script text-2xl leading-snug md:block lg:text-[2rem]">

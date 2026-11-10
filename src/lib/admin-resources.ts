@@ -255,7 +255,7 @@ export const RESOURCES: Resource[] = [
     hasActive: true,
     fields: [
       { name: "placement", label: "Onde aparece", type: "select", required: true, options: BANNER_PLACEMENTS, default: "home_carousel" },
-      { name: "image_path", label: "Imagem", type: "image", folder: "banners", imageHint: "Faixa: 728 × 110 px. Carrossel: aprox. 1030 × 185 px.", wide: true },
+      { name: "image_path", label: "Imagem", type: "image", folder: "banners", imageHint: "Faixa: 728 × 110 px. Carrossel: aprox. 1030 × 185 px. Ilustrações do topo das páginas: PNG ou WEBP com fundo transparente.", wide: true },
       { name: "title", label: "Título (opcional — aparece sobre a imagem)", type: "text" },
       { name: "description", label: "Descrição (opcional)", type: "textarea" },
       { name: "button_text", label: "Texto do botão (opcional)", type: "text" },

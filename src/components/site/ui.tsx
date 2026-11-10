@@ -11,7 +11,8 @@ export function MediaImage({
   className,
   sizes = "(max-width: 768px) 50vw, 25vw",
   priority,
-  fit = "cover"
+  fit = "cover",
+  imgClassName = ""
 }: {
   path: string | null | undefined;
   alt: string;
@@ -19,6 +20,7 @@ export function MediaImage({
   sizes?: string;
   priority?: boolean;
   fit?: "cover" | "contain";
+  imgClassName?: string;
 }) {
   const src = mediaUrl(path);
   if (!src) {
@@ -30,7 +32,7 @@ export function MediaImage({
   }
   return (
     <div className={`relative overflow-hidden ${className ?? ""}`}>
-      <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={fit === "cover" ? "object-cover" : "object-contain"} />
+      <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={`${fit === "cover" ? "object-cover" : "object-contain"} ${imgClassName}`} />
     </div>
   );
 }
@@ -159,9 +161,9 @@ export function PageHero({
             {subtitle && <p className="mt-2 max-w-md whitespace-pre-line text-lg leading-snug text-white/95">{subtitle}</p>}
           </div>
         </div>
-        <div className="hidden h-full min-h-[170px] md:block">
+        <div className="-mb-6 hidden self-end md:block">
           {banner?.image_path && (
-            <MediaImage path={banner.image_path} alt={banner.title ?? ""} fit="contain" className="fade-edges h-full min-h-[170px] w-full" sizes="33vw" priority />
+            <MediaImage path={banner.image_path} alt={banner.title ?? ""} fit="contain" imgClassName="object-bottom" className="h-[190px] w-full" sizes="33vw" priority />
           )}
         </div>
         {script && (
