@@ -1,5 +1,8 @@
 import Image from "next/image";
 import { mediaUrl } from "@/lib/format";
+import { getSite } from "@/lib/site";
+import { MascotAccessory } from "./mascot-accessories";
+import { HeroOrnaments } from "./theme-effects";
 
 /**
  * Banner vermelho do topo das páginas (Início, Ofertas, Setores, Serviços).
@@ -9,7 +12,7 @@ import { mediaUrl } from "@/lib/format";
  *  - direita: frase manuscrita
  * A ilustração vem do banner cadastrado no painel; sem banner, usa os mascotes padrão.
  */
-export function Hero({
+export async function Hero({
   imagePath,
   imageAlt = "Mascotes do Supermercado Japão",
   left,
@@ -25,7 +28,11 @@ export function Hero({
   /** true quando o conteúdo de baixo sobe por cima do banner (página inicial) */
   overlap?: boolean;
 }) {
+  const { theme } = await getSite();
+  const deco = theme.decorations ?? {};
   const src = mediaUrl(imagePath) ?? "/demo/mascotes.webp";
+  // Acessórios só combinam com os mascotes padrão (posições calculadas para essa imagem)
+  const accessory = src === "/demo/mascotes.webp" ? deco.accessory : null;
 
   return (
     <section className={`hero-red relative isolate overflow-hidden text-white ${rounded ? "rounded-2xl" : ""}`}>
@@ -38,22 +45,29 @@ export function Hero({
       <Torii className="absolute -right-4 bottom-0 -z-10 hidden h-40 w-56 text-black/10 lg:block" />
       <Clouds className="absolute -left-10 -top-6 -z-10 h-28 w-72 text-white/10" />
       <Clouds className="absolute -bottom-8 right-1/3 -z-10 hidden h-24 w-64 text-white/10 md:block" />
+      <HeroOrnaments emojis={deco.hero} />
 
       <div className={`container-site relative grid items-end gap-x-4 md:grid-cols-[1.15fr_1fr_0.95fr] ${overlap ? "pt-8 md:pt-6" : "pt-6"}`}>
         <div className={`self-center ${overlap ? "pb-6 md:pb-16" : "pb-6"}`}>{left}</div>
 
         {/* Mascotes: no celular ficam embaixo do texto, no computador no centro */}
-        <div className="relative mx-auto flex h-[170px] w-full max-w-[340px] items-end justify-center sm:h-[200px] md:h-[240px] md:max-w-none lg:h-[260px]">
+        <div
+          className={`relative mx-auto flex h-[170px] w-full max-w-[340px] items-end justify-center sm:h-[200px] md:h-[240px] md:max-w-none lg:h-[260px] ${
+            accessory && HATS.includes(accessory) ? "mt-16 lg:mt-20" : ""
+          }`}
+        >
           <span className="absolute bottom-0 left-1/2 h-4 w-3/4 -translate-x-1/2 rounded-[50%] bg-black/25 blur-md" aria-hidden="true" />
-          <Image
-            src={src}
-            alt={imageAlt}
-            width={1000}
-            height={497}
-            priority
-            sizes="(max-width: 768px) 340px, 36vw"
-            className="relative h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_8px_18px_rgba(0,0,0,0.25)]"
-          />
+          <div className="relative aspect-[1000/497] h-full max-w-full">
+            <Image
+              src={src}
+              alt={imageAlt}
+              fill
+              priority
+              sizes="(max-width: 768px) 340px, 36vw"
+              className="object-contain object-bottom drop-shadow-[0_8px_18px_rgba(0,0,0,0.25)]"
+            />
+            <MascotAccessory kind={accessory} />
+          </div>
         </div>
 
         {script ? (
@@ -69,6 +83,9 @@ export function Hero({
     </section>
   );
 }
+
+// Acessórios que ficam acima da cabeça precisam de espaço extra no topo do banner
+const HATS = ["santa", "witch", "bunny", "party", "party-gold", "straw"];
 
 /** Frase manuscrita: o trecho do meio fica amarelo e há um traço embaixo. */
 function ScriptLines({ text }: { text: string }) {

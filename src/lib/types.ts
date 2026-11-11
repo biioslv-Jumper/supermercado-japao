@@ -143,6 +143,6 @@ export type Theme = {
   name: string;
   is_default: boolean;
   colors: ThemeColors;
-  decorations: { emoji?: string; ribbon?: string };
+  decorations: { emoji?: string; ribbon?: string; accessory?: string; effect?: string; garland?: string; hero?: string };
   texts: Record<string, string>;
 };

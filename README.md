@@ -85,6 +85,15 @@ URL do projeto: `https://btpyliitcwneqqonuwfg.supabase.co`
 - **Preço promocional do produto** é calculado a partir das ofertas ativas (uma única fonte da verdade).
 - **Tema atual:** a função `current_theme()` escolhe o tema agendado vigente; fora dos períodos volta ao tema padrão.
 
+### Temas (visual completo)
+Cada tema muda, além das cores:
+- **Mascotes:** acessório desenhado por cima dos mascotes padrão (gorro de Natal, chapéu de bruxa, orelhas de coelho, chapéu de palha e sardas, óculos escuros, chapéu de festa, pintura verde-amarela com bola e bandeira, laço azul/rosa).
+- **Efeito na tela:** neve, confete (colorido, dourado, verde-amarelo) ou emojis do tema caindo — desligado automaticamente para quem usa "reduzir movimento".
+- **Enfeite abaixo do menu:** pisca-pisca ou bandeirinhas.
+- **Enfeites do banner** (emojis flutuando) e **faixa de aviso** no topo.
+
+Tudo é configurável em **Painel → Temas** (e dá para pré-visualizar antes). Para uma ilustração totalmente diferente em um tema, cadastre um banner com "Exclusivo de um tema".
+
 ### Migrations
 Todas as mudanças de estrutura estão em `supabase/migrations/` e **já foram aplicadas** no projeto Supabase:
 1. `..._core_schema.sql` — tabelas

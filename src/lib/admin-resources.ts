@@ -1,3 +1,6 @@
+import { ACCESSORIES } from "@/components/site/mascot-accessories";
+import { EFFECTS, GARLANDS } from "@/components/site/theme-effects";
+
 // =====================================================================
 // Configuração das telas de cadastro do painel. Cada "recurso" descreve
 // uma tabela, seus campos e como aparece na lista. As telas e as ações
@@ -367,7 +370,11 @@ export const RESOURCES: Resource[] = [
       { name: "colors.accent", label: "Cor de destaque (botões amarelos)", type: "color", default: "#FFD200" },
       { name: "colors.accentInk", label: "Cor do texto sobre o destaque", type: "color", default: "#1A1A1A" },
       { name: "colors.footer", label: "Cor do rodapé", type: "color", default: "#0B1A2C" },
-      { name: "decorations.emoji", label: "Enfeite (emoji)", type: "text", placeholder: "🎄" },
+      { name: "decorations.accessory", label: "Visual dos mascotes", type: "select", options: ACCESSORIES, help: "Acessório desenhado nos mascotes (gorro, chapéu, óculos...). Vale para os mascotes padrão do site." },
+      { name: "decorations.effect", label: "Efeito na tela", type: "select", options: EFFECTS },
+      { name: "decorations.garland", label: "Enfeite abaixo do menu", type: "select", options: GARLANDS },
+      { name: "decorations.hero", label: "Enfeites do banner (emojis)", type: "text", placeholder: "🎄🎁⭐", help: "Aparecem flutuando no banner vermelho do topo e nos efeitos \"Enfeites do tema caindo\"." },
+      { name: "decorations.emoji", label: "Emoji da faixa de aviso", type: "text", placeholder: "🎄" },
       { name: "decorations.ribbon", label: "Faixa de aviso no topo do site", type: "text", placeholder: "Feliz Natal! Ofertas especiais...", wide: true },
       { name: "texts", label: "Textos especiais do tema (opcional)", type: "keyvalue", wide: true, help: "Uma linha por texto, no formato chave = texto. Ex.: home.hero_highlight = ofertas de Natal. As chaves aparecem em Conteúdo do site." },
       active()

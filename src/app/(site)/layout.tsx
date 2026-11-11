@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { getSite } from "@/lib/site";
+import { FallingEffect, Garland } from "@/components/site/theme-effects";
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const { theme, preview } = await getSite();
@@ -27,6 +28,8 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         </div>
       )}
       <Header />
+      <Garland kind={theme.decorations?.garland} />
+      <FallingEffect effect={theme.decorations?.effect} emojis={theme.decorations?.hero || theme.decorations?.emoji} />
       <main id="conteudo">{children}</main>
       <Footer />
     </>

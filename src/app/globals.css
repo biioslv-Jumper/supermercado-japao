@@ -62,3 +62,31 @@ body {
     @apply mb-1 block text-sm font-semibold text-slate-700;
   }
 }
+
+/* ===== Efeitos dos temas ===== */
+@keyframes sj-fall {
+  from { transform: translate3d(0, -12vh, 0) rotate(0deg); }
+  to { transform: translate3d(var(--drift, 0px), 112vh, 0) rotate(540deg); }
+}
+.sj-particle {
+  position: absolute;
+  top: 0;
+  animation-name: sj-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+@keyframes sj-twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.sj-twinkle { animation: sj-twinkle 1.6s ease-in-out infinite; }
+@keyframes sj-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -6px; }
+}
+.sj-float { animation: sj-float 4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .sj-particle { display: none; }
+  .sj-twinkle, .sj-float { animation: none; }
+}
